@@ -1,0 +1,7 @@
+[
+  { "name": "Electronics", "value": 400 },
+  { "name": "Clothing", "value": 300 },
+  { "name": "Furniture", "value": 200 },
+  { "name": "Accessories", "value": 150 },
+  { "name": "Other", "value": 100 }
+]

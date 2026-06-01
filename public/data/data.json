@@ -1,0 +1,19 @@
+{
+  "sidebarItems": [
+    {
+      "title": "Home",
+      "icon": "House",
+      "href": "/"
+    },
+    {
+      "title": "Orders",
+      "icon": "ShoppingCart",
+      "href": "/orders"
+    },
+    {
+      "title": "Settings",
+      "icon": "Settings",
+      "href": "/settings"
+    }
+  ]
+}
