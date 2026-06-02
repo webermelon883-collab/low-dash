@@ -72,8 +72,6 @@ const Sidebar = () => {
         <nav className="flex flex-col gap-2">
           {sidebarItems.map((item) => {
             const IconComponent = Icons[item.icon];
-            const normalize = (p?: string) => (p ? p.toLowerCase().replace(/\/$/, "") : "");
-            const isActive = normalize(pathname) === normalize(item.href);
 
             return (
               <Link
@@ -82,7 +80,7 @@ const Sidebar = () => {
                 className={`flex items-center ${
                   isSidebarOpen ? "justify-start" : "justify-center"
                 } gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                  isActive
+                  pathname === item.href
                     ? "bg-gray-600 text-white"
                     : "text-gray-300 hover:bg-gray-600 hover:text-white"
                 }`}

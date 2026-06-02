@@ -4,7 +4,7 @@ import StatCard from "@/components/StatCard";
 import { motion } from "framer-motion";
 import React from "react";
 
-import Link from "next/link";
+
 import {
   DollarSign,
   ShoppingBag,
@@ -23,7 +23,11 @@ const Icons = {
 
 const ProductPage : React.FC = () => {
     return (
-        <div className="mx-4">
+        <motion.div className="mx-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
             <h1 className="text-2xl font-bold mb-4">Product page</h1>
             <main className="mx-auto py-4 ">
                 <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
@@ -40,7 +44,7 @@ const ProductPage : React.FC = () => {
                 <ProductsTable/>
 
             </main>
-        </div>
+        </motion.div>
     );
 }
 

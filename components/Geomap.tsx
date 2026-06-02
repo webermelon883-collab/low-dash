@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveChoropleth } from "@nivo/geo";
+import { motion } from "framer-motion";
 
 const data = [{ id: "Malaysia", value: 450000 }];
 
@@ -23,7 +24,11 @@ const Geomap = () => {
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <h1 className="text-white text-xl font-bold mb-4">Geomap</h1>
       <div className="w-full h-120 bg-[#1e1e1e] rounded-lg p-4">
         <ResponsiveChoropleth
@@ -60,7 +65,7 @@ const Geomap = () => {
           }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
