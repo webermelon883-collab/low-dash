@@ -1,3 +1,5 @@
+"use client";
+
 import StatCard from "@/components/StatCard";
 import { motion } from "framer-motion";
 import React from "react";
@@ -10,7 +12,7 @@ import {
   SquareActivity
 } from "lucide-react";
 
-import { usePathname } from "next/navigation";
+import ProductsTable from "@/components/ProductsTable";
 
 const Icons = {
   DollarSign,
@@ -21,7 +23,7 @@ const Icons = {
 
 const ProductPage : React.FC = () => {
     return (
-        <div>
+        <div className="mx-4">
             <h1 className="text-2xl font-bold mb-4">Product page</h1>
             <main className="mx-auto py-4 ">
                 <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
@@ -35,11 +37,10 @@ const ProductPage : React.FC = () => {
                     <StatCard name="Stock" icon={SquareActivity} value={89} />
 
                 </motion.div>
+                <ProductsTable/>
 
             </main>
         </div>
-
-
     );
 }
 
