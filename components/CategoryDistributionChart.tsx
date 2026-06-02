@@ -37,7 +37,7 @@ const CategoryDistributionChart: React.FC = () => {
         Category Distribution Chart
       </h2>
 
-      <div className="w-full h-110 bg-[#1e1e1e] rounded-lg">
+      <div className="w-full h-120 bg-[#1e1e1e] rounded-lg">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie

@@ -13,6 +13,8 @@ import {
   Bell,
   Info,
   Menu,
+  Package
+  
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -26,6 +28,7 @@ const Icons = {
   Users,
   Bell,
   Info,
+  Package
 };
 
 type SidebarItem = {

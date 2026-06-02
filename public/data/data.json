@@ -6,6 +6,11 @@
       "href": "/"
     },
     {
+      "title": "Products",
+      "icon": "Package",
+      "href": "/products"
+    },
+    {
       "title": "Orders",
       "icon": "ShoppingCart",
       "href": "/orders"

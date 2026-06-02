@@ -3,6 +3,8 @@
 import CategoryDistributionChart from "@/components/CategoryDistributionChart";
 import SalesOverviewChart from "@/components/salesOverviewChart";
 import StatCard from "@/components/StatCard";
+import Geomap from "@/components/Geomap";
+import Bar from "@/components/Bar";
 import { motion } from "framer-motion";
 import { DollarSign, Salad, ShoppingBag, SquareActivity, User } from "lucide-react";
 import React from "react";
@@ -23,9 +25,11 @@ const OverviewPage: React.FC = () => {
           <StatCard name="Stock" icon={SquareActivity} value={89} />
         </motion.div>
 
-        <div className= "grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8">
           <SalesOverviewChart />
           <CategoryDistributionChart />
+          <Bar/>
+          <Geomap/>
         </div>
 
 

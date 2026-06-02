@@ -27,7 +27,7 @@ const salesOverviewChart : React.FC = () => {
         >
             <h2 className="text-2xl font-bold mb-4">Sales Overview</h2>
 
-            <div className="w-full h-110 py-8 pr-8 pl-4 bg-[#1e1e1e] backdrop-blur-2xl rounded-lg flex items-center justify-center ">
+            <div className="w-full h-120 py-8 pr-8 pl-4 bg-[#1e1e1e] backdrop-blur-2xl rounded-lg flex items-center justify-center ">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={salesData} margin={{ top: 20, right: 20, left: 5, bottom: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#f5f5f5" />
