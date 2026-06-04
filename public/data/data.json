@@ -1,24 +1,28 @@
 {
   "sidebarItems": [
     {
-      "title": "Home",
+      "title": "Dashboard",
+      "href": "/",
       "icon": "House",
-      "href": "/"
-    },
-    {
-      "title": "products",
-      "icon": "Package",
-      "href": "/products"
+      "roles": ["admin", "user"]
     },
     {
       "title": "Orders",
+      "href": "/orders",
       "icon": "ShoppingCart",
-      "href": "/orders"
+      "roles": ["admin", "user"]
+    },
+    {
+      "title": "Products",
+      "href": "/products",
+      "icon": "ShoppingBag",
+      "roles": ["admin"]
     },
     {
       "title": "Settings",
+      "href": "/settings",
       "icon": "Settings",
-      "href": "/settings"
+      "roles": ["admin"]
     }
   ]
 }

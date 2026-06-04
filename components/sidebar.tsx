@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import {
   House,
@@ -13,8 +14,7 @@ import {
   Bell,
   Info,
   Menu,
-  Package
-  
+  Package,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -28,7 +28,7 @@ const Icons = {
   Users,
   Bell,
   Info,
-  Package
+  Package,
 };
 
 type SidebarItem = {
@@ -37,71 +37,93 @@ type SidebarItem = {
   icon: keyof typeof Icons;
 };
 
-const Sidebar = () => {
+interface SidebarProps {
+  mobileOpen: boolean;
+  onClose: () => void;
+}
+
+const Sidebar = ({ mobileOpen, onClose }: SidebarProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [sidebarItems, setSidebarItems] = useState<SidebarItem[]>([]);
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const isAdmin = (session?.user as any)?.role === "admin";
 
   useEffect(() => {
     fetch("/data/data.json")
       .then((response) => response.json())
       .then((data) => setSidebarItems(data.sidebarItems))
-      .catch((error) =>
-        console.error("Failed to load sidebar data:", error)
-      );
+      .catch((error) => console.error("Failed to load sidebar data:", error));
   }, []);
 
   return (
-    <aside
-      className={`${
-        isSidebarOpen ? "w-64" : "w-32"
-      } relative z-10 transition-all duration-300 ease-in-out bg-gray-800 text-white h-screen p-4 flex-shrink-0`}
-    >
-      <div className="h-full bg-gray-700 rounded-lg border-r border-black p-4 flex flex-col">
-        {/* Toggle Button */}
+    <>
+      {mobileOpen ? (
         <button
-          onClick={() => setIsSidebarOpen((prev) => !prev)}
-          className={`cursor-pointer mb-6 p-2 rounded-md hover:bg-gray-600 transition-colors ${
-            !isSidebarOpen ? "px-4" : "px-4"
-          }`}
-        >
-          <Menu size={20} />
-        </button>
+          type="button"
+          onClick={onClose}
+          className="fixed inset-0 z-20 bg-black/50 sm:hidden"
+          aria-label="Close sidebar"
+        />
+      ) : null}
 
-        {/* Navigation */}
-        <nav className="flex flex-col gap-2">
-          {sidebarItems.map((item) => {
-            const IconComponent = Icons[item.icon];
+      <aside
+        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-gray-800 text-white h-full p-4 transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        } sm:relative sm:translate-x-0 sm:h-screen ${isSidebarOpen ? "sm:w-64" : "sm:w-32"}`}
+      >
+        <div className="h-full bg-gray-700 rounded-lg border-r border-black p-4 flex flex-col">
+          {/* Toggle Button (desktop only) */}
+          <button
+            onClick={() => setIsSidebarOpen((prev) => !prev)}
+            className="hidden sm:inline-flex cursor-pointer mb-6 p-2 rounded-md hover:bg-gray-600 transition-colors"
+          >
+            <Menu size={20} />
+          </button>
 
-            return (
-              <Link
-                key={item.title}
-                href={item.href}
-                className={`flex items-center ${
-                  isSidebarOpen ? "justify-start" : "justify-center"
-                } gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                  pathname === item.href
-                    ? "bg-gray-600 text-white"
-                    : "text-gray-300 hover:bg-gray-600 hover:text-white"
-                }`}
-              >
-                <IconComponent size={20} />
+          {/* Navigation */}
+          <nav className="flex flex-col gap-2">
+            {sidebarItems
+              .filter((item) => {
+                const isSettings =
+                  item.href === "/settings" ||
+                  item.title?.toLowerCase().includes("setting");
+                if (isSettings) return isAdmin;
+                return true;
+              })
+              .map((item) => {
+                const IconComponent = Icons[item.icon];
 
-                <span
-                  className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
-                    isSidebarOpen
-                      ? "opacity-100 max-w-xs"
-                      : "opacity-0 max-w-0"
-                  }`}
-                >
-                  {item.title}
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
-    </aside>
+                return (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className={`flex items-center ${
+                      isSidebarOpen ? "justify-start" : "justify-center"
+                    } gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                      pathname === item.href
+                        ? "bg-gray-600 text-white"
+                        : "text-gray-300 hover:bg-gray-600 hover:text-white"
+                    }`}
+                  >
+                    <IconComponent size={20} />
+
+                    <span
+                      className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
+                        isSidebarOpen
+                          ? "opacity-100 max-w-xs"
+                          : "opacity-0 max-w-0"
+                      }`}
+                    >
+                      {item.title}
+                    </span>
+                  </Link>
+                );
+              })}
+          </nav>
+        </div>
+      </aside>
+    </>
   );
 };
 

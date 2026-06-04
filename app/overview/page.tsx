@@ -25,7 +25,7 @@ const OverviewPage: React.FC = () => {
           <StatCard name="Stock" icon={SquareActivity} value={89} />
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8">
+        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-8">
           <SalesOverviewChart />
           <CategoryDistributionChart />
           <Bar/>
