@@ -19,7 +19,7 @@ export default function LayoutContent({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto w-full flex h-screen overflow-hidden">
-      {/* Sidebar */}
+      {/* Sideba */}
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* Main Content */}
