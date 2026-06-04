@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import Header from "./header";
+import { ReactNode, useState } from "react";
 import Sidebar from "./sidebar";
-import { ReactNode } from "react";
 
 export default function LayoutContent({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -15,10 +15,12 @@ export default function LayoutContent({ children }: { children: ReactNode }) {
     return <>{children}</>;
   }
 
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <div className="mx-auto w-full flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
