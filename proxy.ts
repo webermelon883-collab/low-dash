@@ -1,8 +1,8 @@
 import { withAuth } from "next-auth/middleware";
 import { NextRequest } from "next/server";
 
-export const middleware = withAuth(
-  function middleware(req: NextRequest & { nextauth: any }) {
+export const proxy = withAuth(
+  function proxy(req: NextRequest & { nextauth: any }) {
     // Settings page - only admin can access
     if (req.nextUrl.pathname === "/settings") {
       const token = req.nextauth.token;
